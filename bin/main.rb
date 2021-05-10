@@ -12,10 +12,13 @@ puts "#{name_1} will play with X, and #{name_2} will play with O"
 puts "Let's start! Press Enter"
 gets
 system "clear"
-puts square + "\n"
-puts "It's #{name_1}'s turn to play."
-puts 'Select one available cell from the board.'
-number = gets.chomp
-puts "It's #{name_2}'s turn to play."
-puts 'Select one available cell from the board.'
-number = gets.chomp
+find_winner = false
+until  find_winner
+  puts square + "\n"
+  puts "It's #{name_1}'s turn to play."
+  puts 'Select one available cell from the board.'
+  number = gets.chomp
+  puts "It's #{name_2}'s turn to play."
+  puts 'Select one available cell from the board.'
+  number = gets.chomp
+end
