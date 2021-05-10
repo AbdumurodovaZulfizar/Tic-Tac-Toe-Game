@@ -9,7 +9,9 @@ name_1 = first_player[0].upcase + first_player[1..-1].downcase
 name_2 = second_player[0].upcase + second_player[1..-1].downcase
 system "clear"
 puts "#{name_1} will play with X, and #{name_2} will play with O"
-puts "Let's start!"
+puts "Let's start! Press Enter"
+gets
+system "clear"
 puts square + "\n"
 puts "It's #{name_1}'s turn to play."
 puts 'Select one available cell from the board.'
