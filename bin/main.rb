@@ -20,12 +20,6 @@ def input_names
   name
 end
 
-def win_condition
-  system 'clear'
-  puts 'You win!'
-  gets
-end
-
 def move_input
   number = gets.chomp
   ele = number.to_i
@@ -50,6 +44,12 @@ puts "Let's start! Press Enter"
 gets
 system 'clear'
 
+def win_condition(name)
+  system 'clear'
+  puts "You #{name} WON!"
+  gets
+end
+
 until arr.length > 9
   system 'clear'
   puts square
@@ -63,6 +63,8 @@ until arr.length > 9
   puts "it's #{name2}'s turn to play."
   puts 'Please select an available cell from the board!'
   arr << move_input
-  win_condition if arr.length == 4
+  win_condition(name2) if arr.length == 4
 end
-puts 'It a tie'
+system 'clear'
+puts 'It a TIE'
+puts 'Game over!'
