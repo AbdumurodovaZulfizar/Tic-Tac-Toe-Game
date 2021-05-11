@@ -12,69 +12,105 @@ puts "#{name1} will play with X, and #{name2} will play with O"
 puts "Let's start! Press Enter"
 gets
 system 'clear'
-2.times do
+# 2.times do
+#   system 'clear'
+#   puts square
+#   puts "it's #{name1}'s turn to play."
+#   puts 'Please select an available cell from the board!'
+#   number = gets.chomp
+#   ele = number.to_i
+#   until (1..9).any?(ele)
+#     puts 'Invalid move. Please enter a number between 1-9' unless (1..9).any?(ele)
+#     number = gets.chomp
+#     ele = number.to_i
+#   end
+#   system 'clear'
+#   puts square
+#   puts "it's #{name2}'s turn to play."
+#   puts 'Please select an available cell from the board!'
+#   number = gets.chomp
+#   ele = number.to_i
+#   until (1..9).any?(ele)
+#     puts 'Invalid move. Please enter a number between 1-9' unless (1..9).any?(ele)
+#     number = gets.chomp
+#     ele = number.to_i
+#   end
+# end
+# puts "#{name2} you WON the game!!!"
+# gets
+# system 'clear'
+# 2.times do
+#   system 'clear'
+#   puts square
+#   puts "it's #{name1}'s turn to play."
+#   puts 'Please select an available cell from the board!'
+#   number = gets.chomp
+#   ele1 = number.to_i
+#   until (1..9).any?(ele1)
+#     puts 'Invalid move. Please enter a number between 1-9' unless (1..9).any?(ele1)
+#     number = gets.chomp
+#     ele1 = number.to_i
+#   end
+
+#   system 'clear'
+#   puts square
+#   puts "it's #{name2}'s turn to play."
+#   puts 'Please select an available cell from the board!'
+#   number = gets.chomp
+#   ele2 = number.to_i
+#   until (1..9).any?(ele2)
+#     puts 'Invalid move. Please enter a number between 1-9' unless (1..9).any?(ele2)
+#     number = gets.chomp
+#     ele2 = number.to_i
+#   end
+# end
+
+# system 'clear'
+# puts square
+# puts "it's #{name1}'s turn to play."
+# puts 'Please select an available cell from the board!'
+# number = gets.chomp
+# ele1 = number.to_i
+# until (1..9).any?(ele1)
+#   puts 'Invalid move. Please enter a number between 1-9' unless (1..9).any?(ele1)
+#   number = gets.chomp
+#   ele1 = number.to_i
+# end
+# puts "It's a TIE\n"
+# puts 'Game over'
+
+def win_condition
+  if arr[0] == 1 && arr[2] == 3
+    true
+  else
+    false
+  end
+end
+def draw_condition
+  if arr.length == 5
+    true
+  else
+    false
+  end
+end
+while win_condition != true || draw_condition != true
   system 'clear'
   puts square
   puts "it's #{name1}'s turn to play."
   puts 'Please select an available cell from the board!'
-  number = gets.chomp
-  ele = number.to_i
-  until (1..9).any?(ele)
-    puts 'Invalid move. Please enter a number between 1-9' unless (1..9).any?(ele)
+  def move_input
     number = gets.chomp
-    ele = number.to_i
+      ele = number.to_i
+      until (1..9).any?(ele)
+        puts "Invalid move.Please select a number between 1-9."
+        number = gets.chomp
+        ele = number.to_i
+      end
   end
-  system 'clear'
-  puts square
-  puts "it's #{name2}'s turn to play."
-  puts 'Please select an available cell from the board!'
-  number = gets.chomp
-  ele = number.to_i
-  until (1..9).any?(ele)
-    puts 'Invalid move. Please enter a number between 1-9' unless (1..9).any?(ele)
-    number = gets.chomp
-    ele = number.to_i
-  end
+  arr << ele
 end
-puts "#{name2} you WON the game!!!"
-gets
-system 'clear'
-2.times do
-  system 'clear'
-  puts square
-  puts "it's #{name1}'s turn to play."
-  puts 'Please select an available cell from the board!'
-  number = gets.chomp
-  ele1 = number.to_i
-  until (1..9).any?(ele1)
-    puts 'Invalid move. Please enter a number between 1-9' unless (1..9).any?(ele1)
-    number = gets.chomp
-    ele1 = number.to_i
-  end
-
-  system 'clear'
-  puts square
-  puts "it's #{name2}'s turn to play."
-  puts 'Please select an available cell from the board!'
-  number = gets.chomp
-  ele2 = number.to_i
-  until (1..9).any?(ele2)
-    puts 'Invalid move. Please enter a number between 1-9' unless (1..9).any?(ele2)
-    number = gets.chomp
-    ele2 = number.to_i
-  end
-end
-
-system 'clear'
-puts square
-puts "it's #{name1}'s turn to play."
-puts 'Please select an available cell from the board!'
-number = gets.chomp
-ele1 = number.to_i
-until (1..9).any?(ele1)
-  puts 'Invalid move. Please enter a number between 1-9' unless (1..9).any?(ele1)
-  number = gets.chomp
-  ele1 = number.to_i
-end
-puts "It's a TIE\n"
-puts 'Game over'
+  
+  
+  # You can write draw_condition here
+  name1 = name2
+  # assign name for the next turn 
