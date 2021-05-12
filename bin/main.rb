@@ -70,17 +70,12 @@ end
 
 def check_winner(set, com)
   flag = false
-  if set.length == 3
-    8.times do |i|
-      flag = true if com[i].sort == set.sort
-    end
+  8.times do |i|
+    diff = set.sort - com[i]
+    x = com.index((set - diff).sort!)
+    flag = true if !x.nil? && (com[x] == (set - diff).sort!)
   end
   flag
-end
-
-def empty_set(set)
-  set = [] if set.length == 3
-  set
 end
 
 loop do
@@ -88,7 +83,6 @@ loop do
   set1 << turn(player1.name, boxes)
   display_board(symbol(set1.last, 'X', board))
   win1 = check_winner(set1, combinations)
-  set1 = empty_set(set1)
   winner = player1.name
   break if win1
 
@@ -96,7 +90,6 @@ loop do
   set2 << turn(player2.name, boxes)
   display_board(symbol(set2.last, 'O', board))
   win2 = check_winner(set2, combinations)
-  set2 = empty_set(set2)
   winner = player2.name
   break if win2
 end
