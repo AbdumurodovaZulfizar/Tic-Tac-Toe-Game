@@ -8,6 +8,13 @@ boxes = []
 set1 = []
 set2 = []
 winner = ''
+win1 = false
+win2 = false
+
+puts "Hi, 👋! Welcome to Tic Tac Toe Game. Let's begin\n"
+puts "Let's play, to begin press enter."
+gets
+system 'clear'
 
 def input_names(num)
   flag = false
@@ -85,6 +92,7 @@ loop do
   win1 = check_winner(set1, combinations)
   winner = player1.name
   break if win1
+  break if boxes.length == 9
 
   display_board(board)
   set2 << turn(player2.name, boxes)
@@ -94,4 +102,9 @@ loop do
   break if win2
 end
 system 'clear'
-puts "#{winner} you have WON!"
+if win1 || win2
+  puts "Congratulations #{winner}, you WON the Game!"
+elsif boxes.length == 9
+  puts "It's a TIE!"
+  puts 'Game Over.'
+end
