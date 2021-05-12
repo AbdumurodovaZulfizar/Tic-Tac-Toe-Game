@@ -36,18 +36,24 @@ end
 player1 = Player.new(input_names(1))
 player2 = Player.new(input_names(2))
 
+puts "#{player1.name} will play with X and #{player2.name} will play with O"
+puts 'Press ENTER to continue'
+gets
+
 def check_number
-  num = gets.chomp.to_i
+  num = gets.chomp
+  num_i = num.to_i
   flag = false
   until flag
-    if num.is_a?(Numeric) && (1..9).any?(num)
+    if (1..9).any?(num_i)
       flag = true
     else
       puts 'Please only enter a number and from 1-9.'
-      num = gets.chop.to_i
+      num = gets.chop
+      num_i = num.to_i
     end
   end
-  num
+  num_i
 end
 
 def turn(player, box)
