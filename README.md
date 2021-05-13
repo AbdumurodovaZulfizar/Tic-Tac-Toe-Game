@@ -13,7 +13,7 @@
 
 In order to win the game, a player must place three of their marks in a horizontal, vertical, or diagonal row.
 
-The following example game is won by the second player, O:
+The following example game is won by the second player, O:<br>
 <img align="center" alt="GIF" src="https://media.giphy.com/media/ChzovjKPuEiYe8ePih/giphy.gif" />
 
 Players soon discover that the best play from both parties leads to a draw. Hence, tic-tac-toe is most often played by young children, who often have not yet discovered the optimal strategy.
