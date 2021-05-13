@@ -9,11 +9,16 @@ def check_name(num)
   puts "Please enter player number #{num}'s name:"
   name = gets.chomp
   until flag
-    if name.split('*').all?(/^[a-zA-Z]+$/) && !name.split('*').empty?
+    if name.split('*').all?(/^[a-zA-Z]+$/)
       flag = true
+    elsif name == ''
+      system 'clear'
+      puts '❌Incorrect input, name couldn\'t be empty!'
+      puts 'Type again your name:'
+      name = gets.chomp
     else
       system 'clear'
-      puts 'Incorrect input, only letters accepted.'
+      puts '❌Incorrect input, only letters accepted.'
       puts 'Type again your name:'
       name = gets.chomp
     end
@@ -49,7 +54,7 @@ def turn(player, board)
   flag = false
   until flag
     if board.any?(num)
-      puts "Can't choose that number, try again:"
+      puts "❌Can't choose that number, try again:"
       num = gets.chomp.to_i
     else
       board << num
@@ -61,13 +66,13 @@ end
 
 def final(winner)
   if winner == 'No Winner'
-    puts 'GAME OVER!'
+    puts 'GAME OVER☹️!'
   else
-    puts "Congratulations #{winner}, you have won!"
+    puts "Congratulations #{winner}, you have won🎉🎉🎉!"
   end
 end
 
-puts "Let's play Tic-Tac-Toe\n\n"
+puts "Welcome to Angel and Zulfizar's TicTacToe Game!👋"
 player1 = Player.new(check_name(1))
 player2 = Player.new(check_name(2))
 
