@@ -1,18 +1,24 @@
 #!/usr/bin/env ruby
-square = "+---+---+---+\n| 1 | 2 | 3 |\n+---+---+---+\n| 4 | 5 | 6 |\n+---+---+---+\n| 7 | 8 | 9 |\n+---+---+---+"
-arr = []
 
-def input_names
+require_relative '../lib/player'
+require_relative '../lib/board'
+require_relative '../lib/game'
+
+def check_name(num)
   flag = false
-  arr = []
+  puts "Please enter player number #{num}'s name:"
   name = gets.chomp
   until flag
-    arr << name
-    if arr.all?(/^[a-zA-Z]+$/)
+    if name.split('*').empty?
+      system 'clear'
+      puts '❌Incorrect input, name couldn\'t be empty!'
+      puts 'Type again your name:'
+      name = gets.chomp
+    elsif name.split('*').all?(/^[a-zA-Z]+$/)
       flag = true
     else
-      puts 'Incorrect input, only letters accepted.'
-      arr.delete(name)
+      system 'clear'
+      puts '❌Incorrect input, only letters accepted.'
       puts 'Type again your name:'
       name = gets.chomp
     end
@@ -20,51 +26,75 @@ def input_names
   name
 end
 
-def move_input
-  number = gets.chomp
-  ele = number.to_i
-  until (1..9).any?(ele)
-    puts 'Invalid move.Please select a number between 1-9.'
-    number = gets.chomp
-    ele = number.to_i
+def display_board(board, player1, player2)
+  system 'clear'
+  puts board
+  puts "#{player1.name} = #{player1.last_move}\n#{player2.name} = #{player2.last_move}"
+end
+
+def check_number
+  num = gets.chomp
+  num_i = num.to_i
+  flag = false
+  until flag
+    if (1..9).any?(num_i)
+      flag = true
+    else
+      puts 'Please only enter a number and from 1-9.'
+      num = gets.chop
+      num_i = num.to_i
+    end
   end
-  ele
+  num_i
 end
 
-puts "Welcome to Tic Tac Toe Game. Let's begin\n"
-puts 'Enter the name of first player.'
-first_player = input_names
-puts 'Enter the name of second player.'
-second_player = input_names
-name1 = first_player[0].upcase + first_player[1..-1].downcase
-name2 = second_player[0].upcase + second_player[1..-1].downcase
+def turn(player, board)
+  puts "It's #{player}'s turn:"
+  num = check_number
+  flag = false
+  until flag
+    if board.any?(num)
+      puts "❌Can't choose that number, try again:"
+      num = gets.chomp.to_i
+    else
+      board << num
+      flag = true
+    end
+  end
+  num
+end
+
+def final(winner)
+  if winner == 'No Winner'
+    puts 'GAME OVER☹️!'
+  else
+    puts "Congratulations #{winner}, you have won🎉🎉🎉!"
+  end
+end
+
+puts "Welcome to Angel and Zulfizar's TicTacToe Game!👋"
+player1 = Player.new(check_name(1))
+player2 = Player.new(check_name(2))
+
 system 'clear'
-puts "#{name1} will play with X, and #{name2} will play with O"
-puts "Let's start! Press Enter"
+puts "#{player1.name} will play with X and #{player2.name} will play with O"
+puts 'Press ENTER to continue'
 gets
-system 'clear'
 
-def win_condition(name)
-  system 'clear'
-  puts "You #{name} WON!"
-  gets
+game = Game.new
+board = Board.new
+
+until game.flag
+  display_board(board.grid, player1, player2)
+  player1.make_move(turn(player1.name, board.selections))
+  board.insert(player1.last_move, 'X')
+  break if game.check_winner(player1.name, player1.moves, board)
+
+  display_board(board.grid, player1, player2)
+  player2.make_move(turn(player2.name, board.selections))
+  board.insert(player2.last_move, 'O')
+  game.flag = true if game.check_winner(player2.name, player2.moves, board)
 end
 
-until arr.length > 9
-  system 'clear'
-  puts square
-  puts "it's #{name1}'s turn to play."
-  puts 'Please select an available cell from the board!'
-  arr << move_input
-  break if arr.length == 9
-
-  system 'clear'
-  puts square
-  puts "it's #{name2}'s turn to play."
-  puts 'Please select an available cell from the board!'
-  arr << move_input
-  win_condition(name2) if arr.length == 4
-end
-system 'clear'
-puts 'It a TIE'
-puts 'Game over!'
+display_board(board.grid, player1, player2)
+final(game.winner)
