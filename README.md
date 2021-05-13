@@ -96,4 +96,4 @@ Give a ⭐️ if you like this project!
 ## 📝 License
 
 Copyright 2021 Zulfizar Abdumurodova & Ángel Díaz
-- [MIT](https://github.com/AbdumurodovaZulfizar/Tic-Tac-Toe-Game/blob/radme_game_instructions/LICENSE) for this project.
+- [MIT](https://github.com/AbdumurodovaZulfizar/Tic-Tac-Toe-Game/blob/readme_game_instructions/LICENSE) for this project.
