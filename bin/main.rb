@@ -9,13 +9,13 @@ def check_name(num)
   puts "Please enter player number #{num}'s name:"
   name = gets.chomp
   until flag
-    if name.split('*').all?(/^[a-zA-Z]+$/)
-      flag = true
-    elsif name == ''
+    if name.split('*').empty?
       system 'clear'
       puts '❌Incorrect input, name couldn\'t be empty!'
       puts 'Type again your name:'
       name = gets.chomp
+    elsif name.split('*').all?(/^[a-zA-Z]+$/)
+      flag = true
     else
       system 'clear'
       puts '❌Incorrect input, only letters accepted.'
