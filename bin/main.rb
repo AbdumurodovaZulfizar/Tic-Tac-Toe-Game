@@ -1,27 +1,15 @@
 #!/usr/bin/env ruby
 
 require_relative '../lib/player'
+require_relative '../lib/board'
+require_relative '../lib/game'
 
-combinations = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]]
-board = "+---+---+---+\n| 1 | 2 | 3 |\n+---+---+---+\n| 4 | 5 | 6 |\n+---+---+---+\n| 7 | 8 | 9 |\n+---+---+---+"
-boxes = []
-set1 = []
-set2 = []
-winner = ''
-win1 = false
-win2 = false
-
-puts "Hi, 👋! Welcome to Tic Tac Toe Game. Let's begin\n"
-puts "Let's play, to begin press enter."
-gets
-system 'clear'
-
-def input_names(num)
+def check_name(num)
   flag = false
   puts "Please enter player number #{num}'s name:"
   name = gets.chomp
   until flag
-    if name.split('*').all?(/^[a-zA-Z]+$/)
+    if name.split('*').all?(/^[a-zA-Z]+$/) && !name.split('*').empty?
       flag = true
     else
       system 'clear'
@@ -33,12 +21,11 @@ def input_names(num)
   name
 end
 
-player1 = Player.new(input_names(1))
-player2 = Player.new(input_names(2))
-
-puts "#{player1.name} will play with X and #{player2.name} will play with O"
-puts 'Press ENTER to continue'
-gets
+def display_board(board, player1, player2)
+  system 'clear'
+  puts board
+  puts "#{player1.name} = #{player1.last_move}\n#{player2.name} = #{player2.last_move}"
+end
 
 def check_number
   num = gets.chomp
@@ -56,61 +43,53 @@ def check_number
   num_i
 end
 
-def turn(player, box)
+def turn(player, board)
   puts "It's #{player}'s turn:"
   num = check_number
   flag = false
   until flag
-    if box.any?(num)
+    if board.any?(num)
       puts "Can't choose that number, try again:"
       num = gets.chomp.to_i
     else
-      box << num
+      board << num
       flag = true
     end
   end
   num
 end
 
-def symbol(number, symbol, board)
-  board[board.index(number.to_s)] = symbol
-end
-
-def display_board(index)
-  system 'clear'
-  puts index
-end
-
-def check_winner(set, com)
-  flag = false
-  8.times do |i|
-    diff = set.sort - com[i]
-    x = com.index((set - diff).sort!)
-    flag = true if !x.nil? && (com[x] == (set - diff).sort!)
+def final(winner)
+  if winner == 'No Winner'
+    puts 'GAME OVER!'
+  else
+    puts "Congratulations #{winner}, you have won!"
   end
-  flag
 end
 
-loop do
-  display_board(board)
-  set1 << turn(player1.name, boxes)
-  display_board(symbol(set1.last, 'X', board))
-  win1 = check_winner(set1, combinations)
-  winner = player1.name
-  break if win1
-  break if boxes.length == 9
+puts "Let's play Tic-Tac-Toe\n\n"
+player1 = Player.new(check_name(1))
+player2 = Player.new(check_name(2))
 
-  display_board(board)
-  set2 << turn(player2.name, boxes)
-  display_board(symbol(set2.last, 'O', board))
-  win2 = check_winner(set2, combinations)
-  winner = player2.name
-  break if win2
-end
 system 'clear'
-if win1 || win2
-  puts "Congratulations #{winner}, you WON the Game!"
-elsif boxes.length == 9
-  puts "It's a TIE!"
-  puts 'Game Over.'
+puts "#{player1.name} will play with X and #{player2.name} will play with O"
+puts 'Press ENTER to continue'
+gets
+
+game = Game.new
+board = Board.new
+
+until game.flag
+  display_board(board.grid, player1, player2)
+  player1.make_move(turn(player1.name, board.selections))
+  board.insert(player1.last_move, 'X')
+  break if game.check_winner(player1.name, player1.moves, board)
+
+  display_board(board.grid, player1, player2)
+  player2.make_move(turn(player2.name, board.selections))
+  board.insert(player2.last_move, 'O')
+  game.flag = true if game.check_winner(player2.name, player2.moves, board)
 end
+
+display_board(board.grid, player1, player2)
+final(game.winner)
