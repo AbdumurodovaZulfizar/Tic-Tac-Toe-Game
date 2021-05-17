@@ -88,6 +88,7 @@ until game.flag
   display_board(board.grid, player1, player2)
   player1.make_move(turn(player1.name, board.selections))
   board.insert(player1.last_move, 'X')
+  game.flag = true if game.check_winner(player1.name, player1.moves, board)
   break if game.check_winner(player1.name, player1.moves, board)
 
   display_board(board.grid, player1, player2)
