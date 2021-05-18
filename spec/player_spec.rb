@@ -9,7 +9,7 @@ RSpec.describe  Player do
     it 'creates player name in correct format' do
       expect(player1.name).to eql('Omina')
     end
-    it 'creates moves varale' do
+    it 'creates moves variable' do
       expect(player1.moves).to eql([])
     end
   end
