@@ -8,7 +8,8 @@ RSpec.describe Board do
                                  [3, 5, 7]])
     end
     it 'creates grid varable' do
-      expect(board.grid).to eql("+---+---+---+\n| 1 | 2 | 3 |\n+---+---+---+\n| 4 | 5 | 6 |\n+---+---+---+\n| 7 | 8 | 9 |\n+---+---+---+")
+      var = "+---+---+---+\n| 1 | 2 | 3 |\n+---+---+---+\n| 4 | 5 | 6 |\n+---+---+---+\n| 7 | 8 | 9 |\n+---+---+---+"
+      expect(board.grid).to eql(var)
     end
     it 'creates selections variable' do
       expect(board.selections).to eql([])

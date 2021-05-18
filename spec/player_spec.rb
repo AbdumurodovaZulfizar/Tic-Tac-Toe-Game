@@ -1,9 +1,9 @@
 require_relative 'spec_helper'
 require_relative '../lib/player'
 
-RSpec.describe  Player do
-  let(:player1) { Player.new('omina')}
-  let(:player2) { Player.new('fotima')}
+RSpec.describe Player do
+  let(:player1) { Player.new('omina') }
+  let(:player2) { Player.new('fotima') }
 
   describe '#initialize' do
     it 'creates player name in correct format' do
