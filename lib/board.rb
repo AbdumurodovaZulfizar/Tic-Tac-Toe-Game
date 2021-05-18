@@ -12,3 +12,4 @@ class Board
     @grid[@grid.index(number.to_s)] = sym
   end
 end
+
