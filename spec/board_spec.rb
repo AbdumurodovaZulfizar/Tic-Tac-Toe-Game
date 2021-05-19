@@ -17,8 +17,17 @@ RSpec.describe Board do
   end
 
   describe '#insert' do
-    it 'inserts number to the symbol' do
+    it 'inserts number to the symbol when number is between 1-9' do
       expect(board.insert(1, 'X')).to eql('X')
+    end
+    it 'inserts number to the symbol when number is between 1-9' do
+      expect(board.insert(9, 'O')).to eql('O')
+    end
+    it 'shows error when number is not between 1-9' do
+      expect{ board.insert(19, 'O') }.to raise_error(TypeError)
+    end
+    it 'shows error when input is string' do
+      expect{ board.insert('a', 'X') }.to raise_error(TypeError)
     end
   end
 end
