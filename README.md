@@ -48,8 +48,8 @@ To win the game, a player must fill out a line with his symbol vertically, horiz
 ## RSpec test Instructions
 
 <ol>
-  <li>To test this game install RSpec, for it boot up your terminal and punch in gem install rspec to install RSpec.</li>
-  <li>cd into Tic-Tac-Toe-Game project directory</li>
+  <li>To test this game install RSpec, for it boot up your terminal and punch in `gem install rspec` to install RSpec.</li>
+  <li>`cd` into Tic-Tac-Toe-Game project directory</li>
   <li>Type `rspec`</li>
 </ol>
 

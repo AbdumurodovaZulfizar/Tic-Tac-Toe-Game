@@ -31,36 +31,39 @@ def display_board(board, player1, player2)
   puts "#{player1.name} = #{player1.last_move}\n#{player2.name} = #{player2.last_move}"
 end
 
-def check_number
-  num = gets.chomp
-  num_i = num.to_i
-  flag = false
-  until flag
-    if (1..9).any?(num_i)
-      flag = true
-    else
-      puts 'Please only enter a number and from 1-9.'
-      num = gets.chop
-      num_i = num.to_i
+class CheckNum
+  def check_number(num)
+    num = gets.chomp
+    num_i = num.to_i
+    flag = false
+    until flag
+      if (1..9).any?(num_i)
+        flag = true
+      else
+        puts 'Please only enter a number and from 1-9.'
+        num = gets.chomp
+        num_i = num.to_i
+      end
     end
+    num_i
   end
-  num_i
-end
-
-def turn(player, board)
-  puts "It's #{player}'s turn:"
-  num = check_number
-  flag = false
-  until flag
-    if board.any?(num)
-      puts "❌Can't choose that number, try again:"
-      num = gets.chomp.to_i
-    else
-      board << num
-      flag = true
+  
+  def turn(player, board)
+    puts "It's #{player}'s turn:"
+    num = check_number(num)
+    flag = false
+    until flag
+      if board.any?(num)
+        puts "❌Can't choose that number, try again:"
+        num = gets.chomp.to_i
+      else
+        board << num
+        flag = true
+      end
     end
+    num
   end
-  num
+  
 end
 
 def final(winner)
@@ -82,16 +85,16 @@ gets
 
 game = Game.new
 board = Board.new
-
+turn = CheckNum.new
 until game.flag
   display_board(board.grid, player1, player2)
-  player1.make_move(turn(player1.name, board.selections))
+  player1.make_move(turn.turn(player1.name, board.selections))
   board.insert(player1.last_move, 'X')
   game.flag = true if game.check_winner(player1.name, player1.moves, board)
   break if game.check_winner(player1.name, player1.moves, board)
 
   display_board(board.grid, player1, player2)
-  player2.make_move(turn(player2.name, board.selections))
+  player2.make_move(turn.turn(player2.name, board.selections))
   board.insert(player2.last_move, 'O')
   game.flag = true if game.check_winner(player2.name, player2.moves, board)
 end

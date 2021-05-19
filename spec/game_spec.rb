@@ -2,6 +2,7 @@ require_relative 'spec_helper'
 require_relative '../lib/game'
 require_relative '../lib/player'
 require_relative '../lib/board'
+require 'stringio'
 
 RSpec.describe Game do
   let(:player1) { Player.new('omina') }
