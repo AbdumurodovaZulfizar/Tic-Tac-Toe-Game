@@ -21,6 +21,7 @@ Players soon discover that the best play from both parties leads to a draw. Henc
 ## Content
 
 * [Gameplay Instructions](#gameplay-instructions)
+* [RSpec test Instructions](#test-instructions)
 * [Built With](#built-with)
 * [Getting Started](#getting-started)
 * [Dependencies](#dependencies)
@@ -42,6 +43,14 @@ Players soon discover that the best play from both parties leads to a draw. Henc
 To win the game, a player must fill out a line with his symbol vertically, horizontally, or diagonally.</li>
   <li>A draw is reached when neither player manages the above and the grid is filled.
 </li>
+</ol>
+
+## RSpec test Instructions
+
+<ol>
+  <li>To test this game install RSpec, for it boot up your terminal and punch in gem install rspec to install RSpec.</li>
+  <li>cd into Tic-Tac-Toe-Game project directory</li>
+  <li>Type `rspec`</li>
 </ol>
 
 ### Built With
