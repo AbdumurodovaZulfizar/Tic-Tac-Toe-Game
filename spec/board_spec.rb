@@ -24,10 +24,10 @@ RSpec.describe Board do
       expect(board.insert(9, 'O')).to eql('O')
     end
     it 'shows error when number is not between 1-9' do
-      expect{ board.insert(19, 'O') }.to raise_error(TypeError)
+      expect { board.insert(19, 'O') }.to raise_error(TypeError)
     end
     it 'shows error when input is string' do
-      expect{ board.insert('a', 'X') }.to raise_error(TypeError)
+      expect { board.insert('a', 'X') }.to raise_error(TypeError)
     end
   end
 end

@@ -31,8 +31,7 @@ def display_board(board, player1, player2)
   puts "#{player1.name} = #{player1.last_move}\n#{player2.name} = #{player2.last_move}"
 end
 
-
-def check_number(num)
+def check_number
   num = gets.chomp
   num_i = num.to_i
   flag = false
@@ -47,10 +46,10 @@ def check_number(num)
   end
   num_i
 end
-  
+
 def turn(player, board)
   puts "It's #{player}'s turn:"
-  num = check_number(num)
+  num = check_number
   flag = false
   until flag
     if board.any?(num)
