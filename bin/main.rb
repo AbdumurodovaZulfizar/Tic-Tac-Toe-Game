@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-
 require_relative '../lib/player'
 require_relative '../lib/board'
 require_relative '../lib/game'
@@ -41,7 +40,7 @@ def check_number
       flag = true
     else
       puts 'Please only enter a number and from 1-9.'
-      num = gets.chop
+      num = gets.chomp
       num_i = num.to_i
     end
   end
@@ -66,7 +65,7 @@ end
 
 def final(winner)
   if winner == 'No Winner'
-    puts 'GAME OVER☹️!'
+    puts "It is a TIE! \nGAME OVER☹️!"
   else
     puts "Congratulations #{winner}, you have won🎉🎉🎉!"
   end
@@ -83,11 +82,11 @@ gets
 
 game = Game.new
 board = Board.new
-
 until game.flag
   display_board(board.grid, player1, player2)
   player1.make_move(turn(player1.name, board.selections))
   board.insert(player1.last_move, 'X')
+  game.flag = true if game.check_winner(player1.name, player1.moves, board)
   break if game.check_winner(player1.name, player1.moves, board)
 
   display_board(board.grid, player1, player2)
