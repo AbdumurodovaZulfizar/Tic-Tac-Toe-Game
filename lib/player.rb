@@ -4,6 +4,7 @@ class Player
   def initialize(name)
     @name = name[0].upcase + name[1..-1].downcase
     @moves = []
+    @last_move = 0
   end
 
   def make_move(last_move)
