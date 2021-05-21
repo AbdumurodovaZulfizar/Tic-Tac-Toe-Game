@@ -14,10 +14,18 @@ describe Player do
     end
   end
   describe '#make_move' do
-    it 'Add selected number to player moves.' do
+    it 'Add a move and compare it to last move' do
       expect(player1.make_move(1)).to include(player1.last_move)
+    end
+    it 'Add a move and compare it to the last number in moves ' do
       expect(player1.make_move(4)).to include(player1.moves.last)
-      expect(player1.moves).to eq([1, 4])
+    end
+    before 'Add moves to player1' do
+      player1.make_move(7)
+      player1.make_move(3)
+    end
+    it 'Check the last moves in player1' do
+      expect(player1.moves).to eq([7, 3])
     end
   end
 end

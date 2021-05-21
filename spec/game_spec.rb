@@ -1,11 +1,11 @@
 require_relative '../lib/game'
 require_relative '../lib/player'
-require_relative '../lib/player'
+require_relative '../lib/board'
 
 describe Game do
   let(:game) { Game.new }
   let(:board) { Board.new }
-  let(:player1) { Player.new('christine')}
+  let(:player1) { Player.new('christine') }
 
   describe '#initialize' do
     it 'Sets winner to nil' do
@@ -20,7 +20,6 @@ describe Game do
   end
 
   describe 'check_winner' do
-
     before 'Simulate player moves' do
       player1.make_move(1)
       player1.make_move(2)
@@ -32,7 +31,7 @@ describe Game do
     it "Checks wether a player has won or it's a tie." do
       expect(game.check_winner(player1.name, player1.moves, board)).to eq(true)
     end
-    before 'Simulate a no winner'  do
+    before 'Simulate a no winner' do
       range = *(1..9)
       board.selections = range
       game.check_winner(player1.name, [1, 3, 6], board)

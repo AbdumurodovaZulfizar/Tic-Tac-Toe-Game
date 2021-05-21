@@ -27,9 +27,10 @@ describe Board do
     it 'Insers an X or O into the board.' do
       expect(board.insert(5, 'X')).to match(/[+\-\\n]+[|\s1-3]+[+\-\\n]+[|\s4X6]+[+\-\\n]+[|\s7-9]+[+\-\\n]+/)
     end
-    #While playing the game this error will never be raised as it is properly handled in main.rb
+
+    # While playing the game this error will never be raised as it is properly handled in main.rb
     it 'Tests to see if any number greater than 9 can be input.' do
-      expect{ board.insert(10, 'X') }.to raise_error(TypeError)
+      expect { board.insert(10, 'X') }.to raise_error(TypeError)
     end
   end
 end
