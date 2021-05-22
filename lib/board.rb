@@ -10,5 +10,6 @@ class Board
 
   def insert(number, sym)
     @grid[@grid.index(number.to_s)] = sym
+    @grid
   end
 end

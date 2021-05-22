@@ -5,7 +5,7 @@ class Game
   def initialize
     @winner = nil
     @win = false
-    @game = false
+    @flag = false
   end
 
   def check_winner(name, moves, board)
